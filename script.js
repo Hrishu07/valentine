@@ -66,7 +66,8 @@ const pages = [
     title: "💭 One Honest Moment",
     text:
       "Before I ask you anything… I want to be honest.\n\n" +
-      "This isn’t just about a cute website or a Valentine’s day.\n\n" +
+      "This isn’t just about a cute website or a Valentine’s day.\n"
+      "I love you a lot.. I am grateful for you being in my life❤️💞.\n\n" +
       "I care about you deeply.\n" +
       "I respect you.\n" +
       "And I would never want to rush or pressure your heart.\n\n" +
@@ -232,4 +233,5 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
 },400);
+
 
