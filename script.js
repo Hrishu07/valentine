@@ -72,6 +72,7 @@ const pages = [
       "And I would never want to rush or pressure your heart.\n\n" +
       "Whatever you feel—your comfort matters to me most 🤍"
   },
+  
 
   {
     title: "🌹 The Question",
@@ -99,12 +100,59 @@ function render(){
   void card.offsetWidth;
   card.classList.add("slide");
 
-  const navButtons = `
-    <div style="margin-top:25px;">
-      ${index > 0 ? `<button onclick="prev()">⬅ Previous</button>` : ``}
-      ${!page.final ? `<button onclick="next()">Next 💖</button>` : ``}
-    </div>
-  `;
+  let content = `<h2>${page.title}</h2>`;
+
+  // PHOTO PAGE
+  if(page.photo){
+    content += `
+      <div class="photos">
+        <img src="hrishu.jpg">
+        <img src="swagata.jpg">
+      </div>
+      <p>
+        Symptoms include:<br>
+        • Missing you constantly<br>
+        • Smiling at phone like a fool<br>
+        • Heart racing whenever you exist 💕
+      </p>
+    `;
+  }
+  // FINAL PAGE
+  else if(page.final){
+    content += `
+      <p>Dr. Swagata ❤️ Will you be my Valentine for every lifetime? 💍</p>
+    `;
+  }
+  // NORMAL PAGE
+  else{
+    content += `<p>${page.text.replace(/\n/g,"<br>")}</p>`;
+  }
+
+  // 🔥 NAVIGATION BUTTONS (ALWAYS)
+  content += `<div style="margin-top:25px;">`;
+
+  // PREVIOUS BUTTON (NOT on first page)
+  if(index > 0){
+    content += `<button onclick="prev()">⬅ Previous</button>`;
+  }
+
+  // FINAL PAGE BUTTONS
+  if(page.final){
+    content += `
+      <button onclick="yes()">YES ❤️</button>
+      <button class="no" onmouseover="moveNo()">No 🙈</button>
+    `;
+  }
+  // NORMAL / PHOTO PAGE
+  else{
+    content += `<button onclick="next()">Next 💖</button>`;
+  }
+
+  content += `</div>`;
+
+  card.innerHTML = content;
+}
+
 
   if(page.photo){
     card.innerHTML = `
@@ -184,3 +232,4 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
 },400);
+
