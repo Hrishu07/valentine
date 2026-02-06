@@ -100,8 +100,8 @@ function render() {
   if (page.photo) {
     html += `
       <div class="photos">
-        <img src="hrishu.jpg" alt="Hrishu">
-        <img src="swagata.jpg" alt="Swagata">
+        <img src="hrishu.jpeg" alt="Hrishu">
+        <img src="swagata.jpeg" alt="Swagata">
       </div>
       <p>
         Symptoms include:<br>
@@ -192,3 +192,4 @@ setInterval(() => {
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 8000);
 }, 400);
+
