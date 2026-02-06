@@ -1,13 +1,54 @@
 const PASSWORD = "drswagata";
 
 const pages = [
-  {title:"🩺 Patient Admission", text:"Patient Hrishu suffers from a rare heart condition 💓 Caused by falling in love with his doctor 😌"},
-  {title:"📋 Case History", photo:true},
-  {title:"💓 ECG Report", text:"ECG shows irregular rhythm 💗 Every heartbeat spells S W A G A T A"},
-  {title:"🧠 Doctor’s Notes", text:"Patient reacts strongly to doctor’s smile 😏 Touch classified as comfort therapy 🤍"},
-  {title:"💉 Prescription", text:"Medication: Swagata ❤️ Dosage: Unlimited affection 💞 Duration: Lifetime"},
-  {title:"🌹 The Question", final:true}
+
+  {
+    title: "🩺 Patient Admission",
+    text: "Patient Hrishu reports chest tightness 💓\nCause suspected: One Doctor Swagata and her dangerously beautiful smile 😌"
+  },
+
+  {
+    title: "📋 Case History",
+    photo: true
+  },
+
+  {
+    title: "💓 ECG Report",
+    text: "ECG spikes every time you walk into the room 💗\nHeart rhythm spells only one name… Swagata 😌"
+  },
+
+  {
+    title: "😏 Doctor–Patient Interaction",
+    text: "Doctor smiles.\nPatient forgets symptoms.\nDiagnosis worsens.\nDoctor responsible 😏💖"
+  },
+
+  {
+    title: "🌸 Comfort Therapy",
+    text: "Patient feels safest around Doctor 🤍\nHer voice slows the heartbeat.\nHer presence feels like home."
+  },
+
+  {
+    title: "🔥 Side Effects (Confidential)",
+    text: "Side effects include:\n• Blushing when you look at me\n• Wanting to hold your hand\n• Falling harder every single day 😌"
+  },
+
+  {
+    title: "💞 Love Shower",
+    text: "Doctor is kind.\nDoctor is beautiful.\nDoctor is smart.\nDoctor is my favorite place to rest my heart 💖"
+  },
+
+  {
+    title: "💉 Final Prescription",
+    text: "Medication: Swagata ❤️\nDosage: Forever\nWarnings: May cause lifelong attachment 😏"
+  },
+
+  {
+    title: "🌹 The Question",
+    final: true
+  }
+
 ];
+
 
 let index = 0;
 const card = document.getElementById("card");
@@ -85,3 +126,4 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
 },400);
+
