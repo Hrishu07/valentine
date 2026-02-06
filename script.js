@@ -41,11 +41,32 @@ const pages = [
     title: "💉 Final Prescription",
     text: "Medication: Swagata ❤️\nDosage: Forever\nWarnings: May cause lifelong attachment 😏"
   },
+  {
+  title: "😌 Quick Question",
+  text: "Are you made of copper and tellurium?\nBecause you’re Cu-Te 💖"
+},
+
+{
+  title: "🩺 Doctor’s Check",
+  text: "Doctor, is it normal if my heart beats faster when you look at me?\nOr should I schedule more appointments? 😏"
+},
+
+{
+  title: "🧪 Scientific Observation",
+  text: "Conclusion:\nYour smile increases my happiness levels beyond safe limits 💓"
+},
+
+{
+  title: "💞 Honest Admission",
+  text: "I came here to get cured…\nBut I think I just fell harder for you 😌"
+},
+
 
   {
     title: "🌹 The Question",
     final: true
   }
+  
 
 ];
 
@@ -126,4 +147,5 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
 },400);
+
 
