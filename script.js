@@ -41,52 +41,70 @@ const pages = [
     title: "💉 Final Prescription",
     text: "Medication: Swagata ❤️\nDosage: Forever\nWarnings: May cause lifelong attachment 😏"
   },
+
   {
-  title: "😌 Quick Question",
-  text: "Are you made of copper and tellurium?\nBecause you’re Cu-Te 💖"
-},
+    title: "😌 Quick Question",
+    text: "Are you made of copper and tellurium?\nBecause you’re Cu-Te 💖"
+  },
 
-{
-  title: "🩺 Doctor’s Check",
-  text: "Doctor, is it normal if my heart beats faster when you look at me?\nOr should I schedule more appointments? 😏"
-},
+  {
+    title: "🩺 Doctor’s Check",
+    text: "Doctor, is it normal if my heart beats faster when you look at me?\nOr should I schedule more appointments? 😏"
+  },
 
-{
-  title: "🧪 Scientific Observation",
-  text: "Conclusion:\nYour smile increases my happiness levels beyond safe limits 💓"
-},
+  {
+    title: "🧪 Scientific Observation",
+    text: "Conclusion:\nYour smile increases my happiness levels beyond safe limits 💓"
+  },
 
-{
-  title: "💞 Honest Admission",
-  text: "I came here to get cured…\nBut I think I just fell harder for you 😌"
-},
+  {
+    title: "💞 Honest Admission",
+    text: "I came here to get cured…\nBut I think I just fell harder for you 😌"
+  },
 
+  {
+    title: "💭 One Honest Moment",
+    text:
+      "Before I ask you anything… I want to be honest.\n\n" +
+      "This isn’t just about a cute website or a Valentine’s day.\n\n" +
+      "I care about you deeply.\n" +
+      "I respect you.\n" +
+      "And I would never want to rush or pressure your heart.\n\n" +
+      "Whatever you feel—your comfort matters to me most 🤍"
+  },
 
   {
     title: "🌹 The Question",
     final: true
   }
-  
-
 ];
-
 
 let index = 0;
 const card = document.getElementById("card");
 
 function unlock(){
   if(document.getElementById("pass").value === PASSWORD){
-    document.getElementById("lock").style.display="none";
-    document.getElementById("main").style.display="flex";
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("main").style.display = "flex";
     render();
-  } else alert("Access Denied 🚫");
+  } else {
+    alert("Access Denied 🚫");
+  }
 }
 
 function render(){
   const page = pages[index];
+
   card.classList.remove("slide");
   void card.offsetWidth;
   card.classList.add("slide");
+
+  const navButtons = `
+    <div style="margin-top:25px;">
+      ${index > 0 ? `<button onclick="prev()">⬅ Previous</button>` : ``}
+      ${!page.final ? `<button onclick="next()">Next 💖</button>` : ``}
+    </div>
+  `;
 
   if(page.photo){
     card.innerHTML = `
@@ -101,7 +119,7 @@ function render(){
         • Smiling at phone like a fool<br>
         • Heart racing whenever you exist 💕
       </p>
-      <button onclick="next()">Next 💖</button>
+      ${navButtons}
     `;
     return;
   }
@@ -110,42 +128,59 @@ function render(){
     card.innerHTML = `
       <h2>🌹 The Question</h2>
       <p>Dr. Swagata ❤️ Will you be my Valentine for every lifetime? 💍</p>
-      <button onclick="yes()">YES ❤️</button>
-      <button class="no" onmouseover="moveNo()">No 🙈</button>
+      <div style="margin-top:25px;">
+        <button onclick="prev()">⬅ Previous</button>
+        <button onclick="yes()">YES ❤️</button>
+        <button class="no" onmouseover="moveNo()">No 🙈</button>
+      </div>
     `;
     return;
   }
 
   card.innerHTML = `
     <h2>${page.title}</h2>
-    <p>${page.text}</p>
-    <button onclick="next()">Next 💖</button>
+    <p>${page.text.replace(/\n/g, "<br>")}</p>
+    ${navButtons}
   `;
 }
 
-function next(){ index++; render(); }
+function next(){
+  if(index < pages.length - 1){
+    index++;
+    render();
+  }
+}
+
+function prev(){
+  if(index > 0){
+    index--;
+    render();
+  }
+}
 
 function yes(){
   card.innerHTML = `
     <h2>💘 CURED 💘</h2>
-    <p>You just cured a heart and stole it forever 😌❤️<br><br>— Hrishu</p>
+    <p>
+      You just cured a heart and stole it forever 😌❤️<br><br>
+      — Hrishu
+    </p>
   `;
 }
 
 function moveNo(){
-  const btn=document.querySelector(".no");
-  btn.style.top=Math.random()*80+"%";
-  btn.style.left=Math.random()*80+"%";
+  const btn = document.querySelector(".no");
+  if(!btn) return;
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
 }
 
-/* HEARTS */
+/* FLOATING HEARTS */
 setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💗";
-  h.style.left=Math.random()*100+"vw";
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💗";
+  h.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
 },400);
-
-
