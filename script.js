@@ -1,107 +1,78 @@
-/***********************
- * CONFIG
- ***********************/
-const PASSWORD = "drswagata";
-
-/***********************
- * PAGES DATA
- ***********************/
+const PASSWORD = "meri@choomu";
+ 
 const pages = [
+ 
   {
-    title: "🩺 Patient Admission",
-    text: "Patient Hrishu reports chest tightness 💓\nCause suspected: One Doctor Swagata and her dangerously beautiful smile 😌"
+    title: "🏠 Client Brief",
+    text: "Client Hrishu reports a restless heart 💓\nCause suspected: One Interior Designer Kanishka and his dangerously charming style 😌"
   },
-  { title: "📋 Case History", photo: true },
+ 
   {
-    title: "💓 ECG Report",
-    text: "ECG spikes every time you walk into the room 💗\nHeart rhythm spells only one name… Swagata 😌"
+    title: "📋 Portfolio Review",
+    photo: true
   },
+ 
   {
-    title: "😏 Doctor–Patient Interaction",
-    text: "Doctor smiles.\nPatient forgets symptoms.\nDiagnosis worsens.\nDoctor responsible 😏💖"
+    title: "🛋️ Mood Board Report",
+    text: "Mood board shifts every time you walk into the room 💗\nEvery color palette spells only one name… Kanishka 😌"
   },
+ 
   {
-    title: "🌸 Comfort Therapy",
-    text: "Patient feels safest around Doctor 🤍\nHer voice slows the heartbeat.\nHer presence feels like home."
+    title: "😏 Designer–Client Interaction",
+    text: "Designer smiles.\nClient forgets the brief.\nThe vision deepens.\nDesigner responsible 😏💖"
   },
+ 
+  {
+    title: "🌸 Comfort Space",
+    text: "Client feels most at home around the Designer 🤍\nHis ideas bring warmth to every room.\nHis presence feels like a perfectly designed space."
+  },
+ 
   {
     title: "🔥 Side Effects (Confidential)",
-    text: "Side effects include:\n• Blushing when you look at me\n• Wanting to hold your hand\n• Falling harder every single day 😌"
+    text: "Side effects include:\n• Blushing when you look at me\n• Wanting to redesign my world with you\n• Falling harder every single day 😌"
   },
+ 
   {
-    title: "💞 Love Shower",
-    text: "Doctor is kind.\nDoctor is beautiful.\nDoctor is smart.\nDoctor is my favorite place to rest my heart 💖"
+    title: "💞 Appreciation Corner",
+    text: "Designer is creative.\nDesigner is beautiful.\nDesigner is talented.\nDesigner is my favorite place to rest my heart 💖"
   },
+ 
   {
-    title: "💉 Final Prescription",
-    text: "Medication: Swagata ❤️\nDosage: Forever\nWarnings: May cause lifelong attachment 😏"
+    title: "🖼️ Final Design Plan",
+    text: "Blueprint: Kanishka ❤️\nDuration: Forever\nWarnings: May cause lifelong attachment 😏"
   },
+ 
   {
-    title: "😌 Quick Question",
-    text: "Are you made of copper and tellurium?\nBecause you’re Cu-Te 💖"
-  },
-  {
-    title: "🩺 Doctor’s Check",
-    text: "Doctor, is it normal if my heart beats faster when you look at me?\nOr should I schedule more appointments? 😏"
-  },
-  {
-    title: "🧪 Scientific Observation",
-    text: "Conclusion:\nYour smile increases my happiness levels beyond safe limits 💓"
-  },
-  {
-    title: "💞 Honest Admission",
-    text: "I came here to get cured…\nBut I think I just fell harder for you 😌"
-  },
-  {
-    title: "💭 One Honest Moment",
-    text:
-      "Before I ask you anything… I want to be honest.\n\n" +
-      "This isn’t just about a cute website or a Valentine’s day.\n" +
-      "I love you a lot. I am grateful for you being in my life ❤️💞.\n\n" +
-      "I care about you deeply.\n" +
-      "I respect you.\n" +
-      "And I would never want to rush or pressure your heart.\n\n" +
-      "Whatever you feel—your comfort matters to me most 🤍"
-  },
-  { title: "🌹 The Question", final: true }
+    title: "🌹 The Question",
+    final: true
+  }
+ 
 ];
-
-/***********************
- * STATE
- ***********************/
+ 
+ 
 let index = 0;
 const card = document.getElementById("card");
-
-/***********************
- * UNLOCK
- ***********************/
-function unlock() {
-  const passInput = document.getElementById("pass");
-  if (!passInput) return;
-
-  if (passInput.value === PASSWORD) {
-    document.getElementById("lock").style.display = "none";
-    document.getElementById("main").style.display = "flex";
-    index = 0;
+ 
+function unlock(){
+  if(document.getElementById("pass").value === PASSWORD){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").style.display="flex";
     render();
-  } else {
-    alert("Access Denied 🚫");
-  }
+  } else alert("Access Denied 🚫");
 }
-
-/***********************
- * RENDER PAGE
- ***********************/
-function render() {
+ 
+function render(){
   const page = pages[index];
-  let html = `<h2>${page.title}</h2>`;
-
-  // Photo page
-  if (page.photo) {
-    html += `
+  card.classList.remove("slide");
+  void card.offsetWidth;
+  card.classList.add("slide");
+ 
+  if(page.photo){
+    card.innerHTML = `
+      <h2>📋 Portfolio Review</h2>
       <div class="photos">
-        <img src="hrishu.jpeg" alt="Hrishu">
-        <img src="swagata.jpeg" alt="Swagata">
+        <img src="hrishu.jpg">
+        <img src="kanishka.jpg">
       </div>
       <p>
         Symptoms include:<br>
@@ -109,88 +80,50 @@ function render() {
         • Smiling at phone like a fool<br>
         • Heart racing whenever you exist 💕
       </p>
+      <button onclick="next()">Next 💖</button>
     `;
+    return;
   }
-  // Final page
-  else if (page.final) {
-    html += `<p>Dr. Swagata ❤️ Will you be my Valentine for every lifetime? 💍</p>`;
-  }
-  // Normal text page
-  else {
-    html += `<p>${page.text.replace(/\n/g, "<br>")}</p>`;
-  }
-
-  // Navigation buttons
-  html += `<div style="margin-top:25px;">`;
-
-  if (index > 0) {
-    html += `<button onclick="prev()">⬅ Previous</button>`;
-  }
-
-  if (page.final) {
-    html += `
+ 
+  if(page.final){
+    card.innerHTML = `
+      <h2>🌹 The Question</h2>
+      <p>Mr. Kanishka ❤️ Will you be my Valentine for every lifetime? 💍</p>
       <button onclick="yes()">YES ❤️</button>
       <button class="no" onmouseover="moveNo()">No 🙈</button>
     `;
-  } else {
-    html += `<button onclick="next()">Next 💖</button>`;
+    return;
   }
-
-  html += `</div>`;
-  card.innerHTML = html;
-}
-
-/***********************
- * NAVIGATION
- ***********************/
-function next() {
-  if (index < pages.length - 1) {
-    index++;
-    render();
-  }
-}
-
-function prev() {
-  if (index > 0) {
-    index--;
-    render();
-  }
-}
-
-/***********************
- * FINAL YES
- ***********************/
-function yes() {
+ 
   card.innerHTML = `
-    <h2>💘 CURED 💘</h2>
-    <p>
-      You just cured a heart and stole it forever 😌❤️<br><br>
-      — Hrishu
-    </p>
+    <h2>${page.title}</h2>
+    <p>${page.text}</p>
+    <button onclick="next()">Next 💖</button>
   `;
 }
-
-/***********************
- * NO BUTTON ESCAPE
- ***********************/
-function moveNo() {
-  const btn = document.querySelector(".no");
-  if (!btn) return;
-  btn.style.position = "absolute";
-  btn.style.top = Math.random() * 80 + "%";
-  btn.style.left = Math.random() * 80 + "%";
+ 
+function next(){ index++; render(); }
+ 
+function yes(){
+  card.innerHTML = `
+    <h2>💘 PERFECTLY DESIGNED 💘</h2>
+    <p>You just designed a heart and claimed it forever 😌❤️<br><br>— Hrishu</p>
+  `;
 }
-
-/***********************
- * FLOATING HEARTS
- ***********************/
-setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "💗";
-  h.style.left = Math.random() * 100 + "vw";
+ 
+function moveNo(){
+  const btn=document.querySelector(".no");
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
+}
+ 
+/* HEARTS */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
   document.body.appendChild(h);
-  setTimeout(() => h.remove(), 8000);
-}, 400);
-
-
+  setTimeout(()=>h.remove(),8000);
+},400);
+ 
