@@ -1,9 +1,9 @@
 const PASSWORD = "merichoomu";
-
+ 
 const her = { colour: '', decor: '', layout: '', vibe: '' };
 let index = 0;
 const card = document.getElementById("card");
-
+ 
 /* ── PETALS ── */
 const petalSymbols = ["🌸","✨","🌹","💮","🕊️","🌷"];
 setInterval(()=>{
@@ -17,7 +17,7 @@ setInterval(()=>{
   document.body.appendChild(p);
   setTimeout(()=>p.remove(), 18000);
 }, 700);
-
+ 
 /* ── UNLOCK ── */
 function unlock(){
   if(document.getElementById("pass").value === PASSWORD){
@@ -30,14 +30,14 @@ function unlock(){
     setTimeout(()=>box.classList.remove("shake"), 500);
   }
 }
-
+ 
 /* ── ANIMATE CARD ── */
 function animateCard(){
   card.classList.remove("slide");
   void card.offsetWidth;
   card.classList.add("slide");
 }
-
+ 
 /* ── REACTION ── */
 function showReaction(emoji, text, callback){
   const o = document.createElement("div");
@@ -49,7 +49,7 @@ function showReaction(emoji, text, callback){
     setTimeout(()=>{ o.remove(); if(callback) callback(); }, 380);
   }, 1700);
 }
-
+ 
 /* ── PAGES ── */
 const pages = [
   { type:"story", id:"intro" },
@@ -61,7 +61,7 @@ const pages = [
   { type:"story", id:"realises" },
   { type:"final" }
 ];
-
+ 
 function render(){
   animateCard();
   const page = pages[index];
@@ -70,12 +70,21 @@ function render(){
   if(page.type==="photo")    renderPhoto();
   if(page.type==="final")    renderFinal();
 }
-
+ 
 function next(){ index++; render(); }
-
+function prev(){ if(index > 0){ index--; render(); } }
+ 
 /* ── DIVIDER ── */
 const div = `<div class="divider"><span>✦</span></div>`;
-
+ 
+/* ── NAV ROW ── */
+function navRow(nextLabel, nextFn = "next()", showPrev = true){
+  const prevBtn = showPrev && index > 0
+    ? `<button class="btn-prev" onclick="prev()">← Back</button>`
+    : `<span></span>`;
+  return `<div class="nav-row">${prevBtn}<button class="btn-main" onclick="${nextFn}">${nextLabel}</button></div>`;
+}
+ 
 /* ── STORIES ── */
 function renderStory(id){
   if(id==="intro"){
@@ -84,7 +93,7 @@ function renderStory(id){
       <h2>The First Visit</h2>
       ${div}
       <p>I walked into her studio looking for a designer.\n\nI found something far more beautiful instead.\n\nOne glance at Kanishka —\nand I forgot why I even came.</p>
-      <button class="btn-main" onclick="next()">Continue</button>
+      ${navRow("Continue")}
     `;
   } else if(id==="realises"){
     card.innerHTML=`
@@ -92,11 +101,11 @@ function renderStory(id){
       <h2>She Realises…</h2>
       ${div}
       <p>She looked at the final mood board.\nThen slowly looked at me.\n\n<em>"This is… everything I love."</em>\n\nI just smiled quietly.\n<em>"I know."</em></p>
-      <button class="btn-main" onclick="next()">And then…</button>
+      ${navRow("And then…")}
     `;
   }
 }
-
+ 
 /* ── QUESTIONS ── */
 function renderQuestion(id){
   if(id==="colour"){
@@ -118,6 +127,7 @@ function renderQuestion(id){
           <span class="choice-icon">💙</span>Blue-Grey Mist
         </button>
       </div>
+      ${index > 0 ? `<div class="back-row"><button class="btn-prev" onclick="prev()">← Back</button></div>` : ''}
     `;
   } else if(id==="decor"){
     card.innerHTML=`
@@ -138,6 +148,7 @@ function renderQuestion(id){
           <span class="choice-icon">🪞</span>Classic Elegant
         </button>
       </div>
+      ${index > 0 ? `<div class="back-row"><button class="btn-prev" onclick="prev()">← Back</button></div>` : ''}
     `;
   } else if(id==="layout"){
     card.innerHTML=`
@@ -158,6 +169,7 @@ function renderQuestion(id){
           <span class="choice-icon">🌙</span>Bedroom Haven
         </button>
       </div>
+      ${index > 0 ? `<div class="back-row"><button class="btn-prev" onclick="prev()">← Back</button></div>` : ''}
     `;
   } else if(id==="vibe"){
     card.innerHTML=`
@@ -178,15 +190,16 @@ function renderQuestion(id){
           <span class="choice-icon">🌹</span>Romantic & Soft
         </button>
       </div>
+      ${index > 0 ? `<div class="back-row"><button class="btn-prev" onclick="prev()">← Back</button></div>` : ''}
     `;
   }
 }
-
+ 
 function pick(key, value, emoji, reactionText){
   her[key] = value;
   showReaction(emoji, reactionText, ()=>next());
 }
-
+ 
 /* ── PHOTO ── */
 function renderPhoto(){
   card.innerHTML=`
@@ -205,10 +218,10 @@ function renderPhoto(){
       <p>🌸 Vibe &nbsp;&nbsp;&nbsp;— <strong>${her.vibe}</strong></p>
     </div>
     <p class="sub" style="margin-top:14px">She's just realising all of this is exactly her taste… 👀</p>
-    <button class="btn-main" onclick="next()">Continue</button>
+    ${navRow("Continue")}
   `;
 }
-
+ 
 /* ── FINAL ── */
 function renderFinal(){
   card.innerHTML=`
@@ -232,12 +245,13 @@ function renderFinal(){
       Will you be the owner of my home…<br>and my heart? 💍
     </p>
     <div class="final-btns">
+      <button class="btn-prev" onclick="prev()">← Back</button>
       <button class="btn-yes" onclick="yes()">Yes, always ❤️</button>
-      <button class="no" onmouseover="moveNo()">No 🙈</button>
+      <button class="no">No 🙈</button>
     </div>
   `;
 }
-
+ 
 function yes(){
   card.innerHTML=`
     <span class="story-icon big-icon">🏡</span>
@@ -253,13 +267,36 @@ function yes(){
   `;
   launchConfetti();
 }
-
+ 
 function moveNo(){
-  const btn=document.querySelector(".no");
-  btn.style.top=Math.random()*72+"%";
-  btn.style.left=Math.random()*72+"%";
+  const btn = document.querySelector(".no");
+  if(!btn) return;
+  const bw = btn.offsetWidth, bh = btn.offsetHeight;
+  const maxX = window.innerWidth  - bw  - 16;
+  const maxY = window.innerHeight - bh  - 16;
+  let nx = Math.random() * maxX;
+  let ny = Math.random() * maxY;
+  btn.style.left = nx + "px";
+  btn.style.top  = ny + "px";
 }
-
+ 
+document.addEventListener("mousemove", e => {
+  const btn = document.querySelector(".no");
+  if(!btn) return;
+  const bw = btn.offsetWidth, bh = btn.offsetHeight;
+  const br = btn.getBoundingClientRect();
+  const cx = br.left + bw/2, cy = br.top + bh/2;
+  const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+  if(dist < 90){
+    const maxX = window.innerWidth  - bw  - 16;
+    const maxY = window.innerHeight - bh  - 16;
+    let nx = Math.random() * maxX;
+    let ny = Math.random() * maxY;
+    btn.style.left = nx + "px";
+    btn.style.top  = ny + "px";
+  }
+});
+ 
 function launchConfetti(){
   const emojis=["💍","🌹","💖","🌸","✨","🏡","💕","🌷"];
   for(let i=0;i<40;i++){
@@ -275,6 +312,6 @@ function launchConfetti(){
     },i*80);
   }
 }
-
+ 
 /* enter key on password */
 document.getElementById("pass").addEventListener("keydown",e=>{ if(e.key==="Enter") unlock(); });
