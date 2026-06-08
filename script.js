@@ -207,9 +207,9 @@ function renderPhoto(){
     <h2>Our Consultation</h2>
     ${div}
     <div class="photos">
-      <div class="photo-wrap"><img src="hrishu.jpg"><span>Hrishu</span></div>
+      <div class="photo-wrap"><img src="spiderman1.jpg"><span>Hrishu</span></div>
       <div class="heart-between">💕</div>
-      <div class="photo-wrap"><img src="kanishka.jpg"><span>Kanishka</span></div>
+      <div class="photo-wrap"><img src="spiderwoman.jpg"><span>Kanishka</span></div>
     </div>
     <div class="picks-summary">
       <p>🎨 Colour &nbsp;— <strong>${her.colour}</strong></p>
